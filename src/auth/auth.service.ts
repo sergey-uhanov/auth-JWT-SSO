@@ -109,6 +109,7 @@ export class AuthService {
     }
 
     async providerAuth(email: string, agent: string, provider: Provider) {
+        
         const userExists = await this.userService.findOne(email);
         if (userExists) {
             const user = await this.userService.save({ email, provider }).catch((err) => {
@@ -123,10 +124,11 @@ export class AuthService {
         });
         if (!user) {
             throw new HttpException(
-                `Не получилось создать пользователя с email ${email} в Google auth`,
+                `Не получилось создать пользователя с email ${email} `,
                 HttpStatus.BAD_REQUEST,
             );
         }
         return this.generateTokens(user, agent);
     }
+    
 }

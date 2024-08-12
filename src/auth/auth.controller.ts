@@ -23,6 +23,7 @@ import { Request, Response } from 'express'
 import { map, mergeMap } from 'rxjs'
 import { AuthService } from './auth.service'
 import { LoginDto, RegisterDto } from './dto'
+import { GithubGuard } from './guargs/Github.guard'
 import { GoogleGuard } from './guargs/google.guard'
 import { Tokens } from './interfaces'
 
@@ -116,7 +117,40 @@ export class AuthController {
             handleTimeoutAndErrors(),
         );
     }
-
+    @UseGuards(GithubGuard)
+    @Get('github')
+    githubAuth() {
+        // Пустой метод, так как инициируется перенаправление на GitHub
+    }
+    
+    @UseGuards(GithubGuard)
+    @Get('github/callback')
+    async githubAuthCallback(@Req() req: Request, @Res() res: Response) {
+        const token = req.user['accessToken'];
+        return res.redirect(`http://localhost:3000/api/auth/success-github?token=${token}`);
+    }
+    
+    @Get('success-github')
+    successGithub(@Query('token') token: string, @UserAgent() agent: string, @Res() res: Response) {
+        return this.httpService.get(`https://api.github.com/user`, {
+            headers: { Authorization: `token ${token}` },
+        }).pipe(
+            mergeMap(({ data }) => {
+                const email = data.email;
+                if (!email) {
+                    return this.httpService.get(`https://api.github.com/user/emails`, {
+                        headers: { Authorization: `token ${token}` },
+                    }).pipe(
+                        map((emails) => emails.data.find(e => e.primary && e.verified)?.email || `${data.login}@github.com`),
+                        mergeMap((email) => this.authService.providerAuth(email, agent, 'GITHUB'))
+                    );
+                }
+                return this.authService.providerAuth(email, agent, 'GITHUB');
+            }),
+            map((data) => this.setRefreshTokenToCookies(data, res)),          
+            handleTimeoutAndErrors(),
+        );
+    }
   
 
     

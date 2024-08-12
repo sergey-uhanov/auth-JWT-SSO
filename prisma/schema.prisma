@@ -41,5 +41,5 @@ enum Role {
 
 enum Provider {
   GOOGLE
-  YANDEX
+  GITHUB
 }
