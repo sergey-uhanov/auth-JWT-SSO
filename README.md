@@ -1,73 +1,32 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Проект: Аутентификация и Авторизация с JWT и SSO
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Описание
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Этот проект представляет собой реализацию системы аутентификации и авторизации, использующую JSON Web Token (JWT) для обеспечения безопасности и Single Sign-On (SSO) через Google и GitHub. Проект также включает в себя полноценную документацию API, созданную с использованием Swagger (OpenAPI).
 
-## Description
+## Главные технологии
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **NestJS**: Фреймворк для разработки backend-приложения.
+- **TypeScript**: Основной язык разработки.
+- **Prisma**: ORM для взаимодействия с базой данных.
+- **JWT**: Механизм для генерации и проверки токенов аутентификации.
+- **Passport**: Библиотека для реализации аутентификации, включая SSO через Google и GitHub.
+- **Swagger (OpenAPI)**: Инструмент для документирования API.
+- **PostgreSQL**: Реляционная база данных.
+- **Docker**: Контейнеризация приложения для облегчения развертывания и разработки.
 
-## Installation
+## Использование
 
-```bash
-$ yarn install
-```
+### Аутентификация
 
-## Running the app
+Проект реализует аутентификацию с использованием JWT. После успешного входа пользователю выдается JWT-токен, который необходимо передавать в заголовке `Authorization` для доступа к защищенным маршрутам.
 
-```bash
-# development
-$ yarn run start
+### Авторизация
 
-# watch mode
-$ yarn run start:dev
+Система поддерживает аутентификацию через сторонние сервисы с использованием SSO, таких как Google и GitHub. Для этого реализованы соответствующие стратегии на основе Passport.
 
-# production mode
-$ yarn run start:prod
-```
+### Документация API
 
-## Test
+Документация API доступна по адресу `/api` после запуска приложения. Она предоставляет подробное описание всех маршрутов, их параметров и возвращаемых данных.
 
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+****
