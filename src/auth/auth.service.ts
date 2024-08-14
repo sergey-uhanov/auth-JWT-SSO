@@ -40,8 +40,10 @@ export class AuthService {
             return null;
         });
         if (user) {
-            throw new ConflictException('Пользователь с таким email уже зарегистрирован');
+            throw new ConflictException('A user with this email address has already been registered');
         }
+
+        
         return this.userService.save(dto).catch((err) => {
             this.logger.error(err);
             return null;
@@ -54,7 +56,7 @@ export class AuthService {
             return null;
         });
         if (!user || !compareSync(dto.password, user.password)) {
-            throw new UnauthorizedException('Не верный логин или пароль');
+            throw new UnauthorizedException('Incorrect login or password');
         }
         return this.generateTokens(user, agent);
     }

@@ -1,12 +1,12 @@
-import { JwtPayload } from '@auth/interfaces';
-import { convertToSecondsUtil } from '@common/utils';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { ForbiddenException, Inject, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { Role, User } from '@prisma/client';
-import { PrismaService } from '@prisma/prisma.service';
-import { genSaltSync, hashSync } from 'bcrypt';
-import { Cache } from 'cache-manager';
+import { JwtPayload } from '@auth/interfaces'
+import { convertToSecondsUtil } from '@common/utils'
+import { CACHE_MANAGER } from '@nestjs/cache-manager'
+import { ForbiddenException, Inject, Injectable } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
+import { Role, User } from '@prisma/client'
+import { PrismaService } from '@prisma/prisma.service'
+import { genSaltSync, hashSync } from 'bcrypt'
+import { Cache } from 'cache-manager'
 
 @Injectable()
 export class UserService {
@@ -60,7 +60,8 @@ export class UserService {
         return user;
     }
 
-    async delete(id: string, user: JwtPayload) {
+    async delete(id: string, user: JwtPayload) {        
+        
         if (user.id !== id && !user.roles.includes(Role.ADMIN)) {
             throw new ForbiddenException();
         }

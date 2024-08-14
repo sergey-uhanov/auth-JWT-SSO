@@ -1,5 +1,5 @@
-import { RegisterDto } from '@auth/dto';
-import { ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
+import { RegisterDto } from '@auth/dto'
+import { ValidationArguments, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator'
 
 @ValidatorConstraint({ name: 'IsPasswordsMatching', async: false })
 export class IsPasswordsMatchingConstraint implements ValidatorConstraintInterface {
@@ -9,6 +9,6 @@ export class IsPasswordsMatchingConstraint implements ValidatorConstraintInterfa
     }
 
     defaultMessage(validationArguments?: ValidationArguments): string {
-        return 'Пароли не совпадают';
+        return "The passwords don't match";
     }
 }
